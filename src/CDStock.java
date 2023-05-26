@@ -8,11 +8,11 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class CDStock {
+	Scanner scanner = new Scanner(System.in);
 
 	private String name;
 	ArrayList<String[]> csv = new ArrayList<>();
 	int sum = 1;
-	int num = 2;
 
 	public CDStock() {
 
@@ -67,6 +67,40 @@ public class CDStock {
 				}
 			}
 		}
+		System.out.println("作業を続けますか？");
+		String yn = scanner.nextLine();
+        if( yn.equals("y")) {
+        	System.out.println("1:検索モード 2:データ表示モード 3:削除モード 4:追加モード");
+        	int mode = scanner.nextInt();
+        	scanner.nextLine();
+        	switch(mode) {
+        	case 1:
+        		System.out.println("検索モード");
+        		System.out.println("アーティスト名またはアルバム名を入力してください");
+            	String rename = scanner.nextLine();
+        		search(rename);
+        		break;
+        	case 2:
+        		System.out.println("データ一覧表示モード");
+        		System.out.println("データを再度一覧表示します");
+        		dispall();
+        		break;
+        	case 3:
+        		System.out.println("データ削除モード");
+        		System.out.println("削除するアーティストを入力してください");
+            	String rename2 = scanner.nextLine();
+        		remove(rename2);
+        		break;
+        	case 4:
+        		System.out.println("データ追加モード");
+        		add();
+        		break;
+        	}
+        }else {
+        	System.out.println("システムを終了します。");
+        	System.exit(0);
+        }
+
 	}
 
 
@@ -75,6 +109,7 @@ public class CDStock {
 	}
 
 	public void search(String name) {
+		int num = 2;
 		System.out.println("検索キーワードは" + name + "です");
 		System.out.println("照合中です....");
 		for(String [] list : csv) {
@@ -92,6 +127,17 @@ public class CDStock {
 					}
 			}else if(!(str.equals(name))&& num == (list.length * csv.size())+1){
 				System.out.println("これ以上見つかりません");
+                System.out.println("検索を続けますか？ y/n");
+                String yn3 = scanner.nextLine();
+                if( yn3.equals("y")) {
+                	System.out.println("アーティスト名またはアルバム名を入力してください");
+                	String rename = scanner.nextLine();
+                	//road();
+                	search(rename);
+                }else {
+                	System.out.println("システムを終了します。");
+                	System.exit(0);
+                }
 
 				}
 			}
@@ -121,9 +167,29 @@ public class CDStock {
 	                    iterator.remove(); // イテレータを使用してリストから要素を削除
 	                    csv.remove(list); // リストからも要素を削除
 	                    updateCSV(); // CSVファイルを更新
+	                    System.out.println("削除を続けますか？ y/n");
+	                    String yn1 = scanner.nextLine();
+	                    if( yn1.equals("y")) {
+	                    	System.out.println("アーティスト名を入力してください");
+	                    	String rename = scanner.nextLine();
+	                    	remove(rename);
+	                    }else {
+	                    	System.out.println("システムを終了します。");
+	                    	System.exit(0);
+	                    }
 	                } else {
 	                    System.out.println("削除を取り消しました");
-	                    System.exit(0);
+	                    System.out.println("削除を続けますか？ y/n");
+	                    String yn2 = scanner.nextLine();
+	                    if( yn2.equals("y")) {
+	                    	System.out.println("アーティスト名を入力してください");
+	                    	String rename = scanner.nextLine();
+	                    	//road();
+	                    	remove(rename);
+	                    }else {
+	                    	System.out.println("システムを終了します。");
+	                    	System.exit(0);
+	                    }
 	                }
 	                break; // 内側のループを終了
 	            }else if(!artist.equals(name) && num2 == csv.size()){
@@ -158,7 +224,6 @@ public class CDStock {
 	}
 
     public void add() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("追加データを入力してください");
         System.out.println("アーティスト名");
         String artist = scanner.nextLine();
@@ -170,6 +235,14 @@ public class CDStock {
         csv.add(data);
         updateCSV2();
         System.out.println("データがCSVファイルに追加されました");
+        System.out.println("追加を続けますか？ y/n");
+        String yn = scanner.nextLine();
+        if( yn.equals("y")) {
+        	add();
+        }else {
+        	System.out.println("システムを終了します。");
+        	System.exit(0);
+        }
     }
 
     private void updateCSV2() {
@@ -190,6 +263,18 @@ public class CDStock {
             e.printStackTrace();
         }
     }
+
+    public String disp2() {
+    	String [] boxes = {"検索モード","データ表示モード","削除モード","追加モード"};
+    	int num = 0;
+    	System.out.println("モードを選択してください");
+        for(String box : boxes) {
+        	num+=1;
+        	System.out.println(num + " : " + box);
+        }
+        String mode = scanner.nextLine();
+        return(mode);
+	}
 }
 
 
