@@ -9,10 +9,9 @@ import java.util.Scanner;
 
 public class CDStock {
 	Scanner scanner = new Scanner(System.in);
-
+	int sum = 1;
 	private String name;
 	ArrayList<String[]> csv = new ArrayList<>();
-	int sum = 1;
 
 	public CDStock() {
 
@@ -42,7 +41,6 @@ public class CDStock {
 				String[] val = line.split(",");
 				csv.add(val);
 			}
-//
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -51,7 +49,7 @@ public class CDStock {
 			sc.close();
 		}
 
-		}
+	}
 
 	public void dispall() {
 		int sum = 0;
@@ -67,7 +65,8 @@ public class CDStock {
 				}
 			}
 		}
-		System.out.println("作業を続けますか？");
+
+		System.out.println("作業を続けますか？ y/n");
 		String yn = scanner.nextLine();
         if( yn.equals("y")) {
         	System.out.println("1:検索モード 2:データ表示モード 3:削除モード 4:追加モード");

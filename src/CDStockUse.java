@@ -16,6 +16,8 @@ public class CDStockUse {
 
         ft.disp();
         Scanner scanner = new Scanner(System.in);
+
+        while(true) {
         mode = scanner.nextInt();
         scanner.nextLine();
 
@@ -44,7 +46,11 @@ public class CDStockUse {
             case 4:
             	System.out.println(as.createAscii("Add"));
             	cs.add();
-
+            default:
+            	System.out.println("有効な数値ではありません");
+            	System.out.println("再入力してください");
+            	continue;
+        	}
         }
     }
 }
