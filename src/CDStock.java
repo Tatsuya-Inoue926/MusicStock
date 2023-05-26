@@ -97,6 +97,9 @@ public class CDStock {
         		System.out.println("データ追加モード");
         		add();
         		break;
+        	}if(mode != 1 && mode != 2 && mode != 3 && mode != 4) {
+        		System.out.println("システムを終了します。");
+            	System.exit(0);
         	}
         }else {
         	System.out.println("システムを終了します。");
