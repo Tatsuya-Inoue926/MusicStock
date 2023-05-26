@@ -70,8 +70,9 @@ public class CDStock {
 
 		System.out.println("作業を続けますか？ y/n");
 		String yn = scanner.nextLine();
-        if( yn.equals("y")) {
-        	System.out.println("任意の数字を入力してください");
+
+		if( yn.equals("y")) {
+        	System.out.println("任意の数字を入力してください 1234以外の数字を入力すると終了");
         	System.out.println("1:検索モード 2:データ表示モード 3:削除モード 4:追加モード");
         	int mode = scanner.nextInt();
         	scanner.nextLine();
@@ -138,6 +139,7 @@ public class CDStock {
 				System.out.println("これ以上見つかりません");
                 System.out.println("検索を続けますか？ y/n");
                 String yn3 = scanner.nextLine();
+                try {
                 if( yn3.equals("y")) {
                 	System.out.println("アーティスト名またはアルバム名を入力してください");
                 	String rename = scanner.nextLine();
@@ -178,6 +180,10 @@ public class CDStock {
                     	System.out.println("システムを終了します。");
                     	System.exit(0);
                     	}
+                }catch(Exception e) {
+                	System.out.println("システム終了");
+                	System.exit(0);
+                }
 
             		}
 				}
