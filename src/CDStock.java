@@ -54,6 +54,7 @@ public class CDStock {
 	public void dispall() {
 		int sum = 0;
 		System.out.println("現在のデータを全て表示します");
+		System.out.println("-♪-♪-♪-♪-♪-♪-♪-♪-♪-♪");
 		for( String[] array : csv ) {
 			for( String str : array ) {
 				System.out.print(str);
@@ -65,10 +66,12 @@ public class CDStock {
 				}
 			}
 		}
+		System.out.println("-♪-♪-♪-♪-♪-♪-♪-♪-♪-♪");
 
 		System.out.println("作業を続けますか？ y/n");
 		String yn = scanner.nextLine();
         if( yn.equals("y")) {
+        	System.out.println("任意の数字を入力してください");
         	System.out.println("1:検索モード 2:データ表示モード 3:削除モード 4:追加モード");
         	int mode = scanner.nextInt();
         	scanner.nextLine();
@@ -111,6 +114,7 @@ public class CDStock {
 		int num = 2;
 		System.out.println("検索キーワードは" + name + "です");
 		System.out.println("照合中です....");
+		System.out.println();
 		for(String [] list : csv) {
 			for(String str : list) {
 				num++;
@@ -119,12 +123,15 @@ public class CDStock {
 					System.out.println("アーティスト名 : " + str);
 					System.out.println("アルバム名 : "+ list[sum]);
 					System.out.println("在庫数 : " + list[sum+1]);
+					System.out.println();
 					}else if(str.equals(name) && num % 3 == 1) {
 						System.out.println("アーティスト名 : " + list[sum-1]);
 						System.out.println("アルバム名 : "+ str);
 						System.out.println("在庫数 : " + list[sum+1]);
+						System.out.println();
 					}
 			}else if(!(str.equals(name))&& num == (list.length * csv.size())+1){
+				System.out.println();
 				System.out.println("これ以上見つかりません");
                 System.out.println("検索を続けますか？ y/n");
                 String yn3 = scanner.nextLine();
@@ -133,15 +140,49 @@ public class CDStock {
                 	String rename = scanner.nextLine();
                 	//road();
                 	search(rename);
-                }else {
-                	System.out.println("システムを終了します。");
-                	System.exit(0);
-                }
+                }else if(!(yn3.equals("y"))) {
+                    	System.out.println("任意の数字を入力してください 終了するには1234以外を入力");
+                    	System.out.println("1:検索モード 2:データ表示モード 3:削除モード 4:追加モード");
+                    	int mode = scanner.nextInt();
+                    	scanner.nextLine();
+                    	switch(mode) {
+                    	case 1:
+                    		System.out.println("検索モード");
+                    		System.out.println("アーティスト名またはアルバム名を入力してください");
+                        	String rename1 = scanner.nextLine();
+                    		search(rename1);
+                    		break;
+                    	case 2:
+                    		System.out.println("データ一覧表示モード");
+                    		System.out.println("データを再度一覧表示します");
+                    		dispall();
+                    		break;
+                    	case 3:
+                    		System.out.println("データ削除モード");
+                    		System.out.println("削除するアーティストを入力してください");
+                        	String rename2 = scanner.nextLine();
+                    		remove(rename2);
+                    		break;
+                    	case 4:
+                    		System.out.println("データ追加モード");
+                    		add();
+                    		break;
+                    	}if(mode != 1 && mode != 2 && mode != 3 && mode != 4) {
+                    		System.out.println("システムを終了します。");
+                        	System.exit(0);
+                    	}
+                    }else {
+                    	System.out.println("システムを終了します。");
+                    	System.exit(0);
+                    	}
 
+            		}
 				}
+
 			}
 		}
-	}
+
+
 
 	public void remove(String name) {
 		int num2 = 0;
